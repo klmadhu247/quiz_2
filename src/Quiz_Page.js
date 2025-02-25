@@ -1,53 +1,43 @@
 import React from "react";
-import qz from './assets/qz.webp'
+import qz from './assets/qz.webp';
 import { useNavigate } from "react-router-dom";
 
+function Quiz_Page() {
+  const navigate = useNavigate();
 
-function Quiz_Page(){
-const navigate = useNavigate();
-    const handleStart=()=>
-    {
-        navigate('/qstns')
+  const handleStart = () => {
+    navigate('/qstns');
+  };
 
-
-    }
-
-    return(
-        <div>
-           <div className='flex flex-row gap-1  border-2 mt-10 rounded-3xl border-red-300  h-3/4 w-3/4 mx-auto items-start shadow-2xl bg-gray-300' style={{height:'500px'}}>
-        <div className='h-full bg-violet-200 border rounded-s-3xl'>
-    <div className='pl-14 mt-20 '>
-<div className='flex flex-row items-end '><h2 className='text-3xl font-bold'>Welcome to the <span className="text-4xl font-bold bg-gradient-to-r from-blue-600 via-red-600 via-yellow-400 via-blue-600 via-green-600 to-red-600 text-transparent bg-clip-text">
-  QuizHunt
-</span>
- </h2> <img src={qz} className="w-20 h-auto mt-4 animate-bounce " /> </div>
-
-
-
-    </div>
-    </div>
-
-    <div className='login template d-flex justify-content-center align-items-center'>
-      <div className='40-w p-10 rounded bg-white bg-transparent ms-20'>
-     
-      <h3>Quiz Instructions</h3>
-<h5>Each question carries one mark.
-</h5>
-<h5>    
-    You must 
-complete the quiz within 1 minute.</h5>
-<button className="btn btn-primary" onClick={handleStart}>Start Quiz</button>
-
- 
-
-     </div>
-    </div>
-
-    
-
-    </div>
-
+  return (
+    <div className="container-fluid d-flex justify-content-center align-items-center py-5">
+      <div className='row w-75 border-2 mt-4 rounded-3xl border-red-300 shadow-2xl bg-gray-300'>
+        
+        <div className='col-12 col-md-6 bg-violet-200 p-4 d-flex flex-column justify-content-center align-items-center lg:border rounded-s-3xl md: border rounded-t-3xl'>
+          <h2 className='text-3xl font-bold text-center mb-3'>
+            Welcome to the{' '}
+            <span className="text-4xl font-bold bg-gradient-to-r from-blue-600 via-red-600 via-yellow-400 via-blue-600 via-green-600 to-red-600 text-transparent bg-clip-text">
+              QuizHunt
+            </span>
+          </h2>
+          <img src={qz} className="w-20 h-auto mt-4 animate-bounce" alt="quiz logo" />
         </div>
-    )
+
+        <div className='col-12 col-md-6 d-flex justify-content-center align-items-center py-4'>
+          <div className='w-100 p-5 rounded bg-white bg-transparent'>
+            <h3 className="text-center mb-4">Quiz Instructions</h3>
+            <h5 className="mb-3">Each question carries one mark.</h5>
+            <h5 className="mb-3">You must complete the quiz within 1 minute.</h5>
+
+            <div className="d-flex justify-content-center">
+              <button className="btn btn-primary w-100 w-md-auto" onClick={handleStart}> Start Quiz</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
 }
+
 export default Quiz_Page;

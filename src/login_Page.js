@@ -72,13 +72,10 @@ function Login() {
     <div className="container-fluid d-flex justify-content-center align-items-center py-5">
       <div className="row w-75 border-2 mt-4 rounded-3xl border-red-300 shadow-2xl bg-gray-300">
     
-        <div className="col-12 col-md-6 bg-violet-200 p-4 d-flex flex-column justify-content-center align-items-center lg:border rounded-s-3xl md:border rounded-t-3xl">
+        <div className="col-12 col-md-6 bg-violet-200 p-4 d-flex flex-column justify-content-center align-items-center lg:border rounded-s-3xl md:border sm:border rounded-t-3xl">
           <h2 className="text-3xl font-bold text-center mb-3">
             Welcome to the{' '}
-            <span className="text-4xl font-bold bg-gradient-to-r from-blue-600 via-red-600 via-yellow-400 via-blue-600 via-green-600 to-red-600 text-transparent bg-clip-text">
-              QuizHunt
-            </span>
-          </h2>
+      <span className="text-4xl font-bold bg-gradient-to-r from-blue-600 via-red-600 via-yellow-400 via-blue-600 via-green-600 to-red-600 text-transparent bg-clip-text">QuizHunt</span> </h2>
           <img src={qz} className="w-20 h-auto mt-4 animate-bounce" alt="quiz logo" />
         </div>
 
@@ -89,43 +86,21 @@ function Login() {
 
             {!isSignup && (
               <form>
-                <div className="mb-2">
-                  <label htmlFor="username">User Name</label>
-                  <input
-                    type="text"
-                    placeholder="Enter User Name"
-                    value={userName}
-                    onChange={(e) => setUserName(e.target.value)}
-                    className="form-control"
-                  />
-                </div>
+           <div className="mb-2">
+          <label htmlFor="username">User Name</label>
+             <input type="text" placeholder="Enter User Name" value={userName} onChange={(e) => setUserName(e.target.value)} className="form-control"/> </div>
 
                 <div className="mb-2">
                   <label htmlFor="Password">Password</label>
-                  <input
-                    type="password"
-                    placeholder="Enter Password"
-                    value={pass}
-                    onChange={(e) => setPass(e.target.value)}
-                    className="form-control"
-                  />
+                  <input type="password" placeholder="Enter Password" value={pass} onChange={(e) => setPass(e.target.value)} className="form-control" />
                 </div>
 
                 <div>
-                  <button
-                    type="submit"
-                    className="btn btn-primary w-130"
-                    onClick={handleSignin}
-                  >
-                    Sign In
-                  </button>
+                  <button type="submit" className="btn btn-primary w-130" onClick={handleSignin}>Sign In</button>
                 </div>
                 <div className="mt-3 text-center">
                   <span className="font-medium">New User?</span>
-                  <button
-                    className="btn btn-link"
-                    onClick={(e) => {
-                      e.preventDefault();
+                  <button className="btn btn-link"onClick={(e) => { e.preventDefault();
                       setSignup(!isSignup);
                     }}
                   >
