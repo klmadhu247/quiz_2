@@ -13,7 +13,9 @@ function Questions() {
 const [selected,setSelected] =useState('');
     const [score,setScore] =useState(0);
     const navigate = useNavigate();
+    const [timeLeft,setTimeLeft] = useState(60);
 
+    
     useEffect(()=>{
         const fetchQuestions =async()=>
         {
@@ -22,7 +24,26 @@ const [selected,setSelected] =useState('');
             
         }
         fetchQuestions();
-    },[])
+
+
+        const timer = setInterval(()=>{
+            if(timeLeft>1)
+            {
+                setTimeLeft((pre)=>pre-1);
+            }
+            else{
+                clearInterval(timer);
+                navigate('/')
+
+            }
+           
+            
+        },1000)
+
+        return ()=> clearInterval(timer);
+    
+
+    },[timeLeft])
 
     const handleNext=()=>
     {
@@ -82,12 +103,14 @@ console.log(score)
 </span>
  </h2> <img src={qz} className="w-10 h-auto mb-2  animate-bounce " />
  </div>
+
+ <h5 className="mb-4">Time Remaining: {timeLeft} </h5>
       {/* {  Questions.map(qs=><p>{qs.question}<ul><li>{qs.options.map(q=>(<><input type="radio" className="ml-1"/><span className="ml-1">{q}</span></>))}</li></ul></p>)} */}
        {Questions.length===0? (<p>Questions are Loading Please Wait...</p>):(<div key={questionIndex}><h4>{Questions[questionIndex].question}</h4>
    <p>{Questions[questionIndex].options.map((op,id)=><><input type="radio" name="Option" value={op}onChange={(e)=>{setSelected(e.target.value)}} className="ml-1"/><span className="ml-1">{op}</span></>)} </p>
 
-   <button className="btn btn-warning flex items-center w-20 mr-4" disabled={questionIndex==0} onClick={handlePrev}>Prev</button>
-    <button className="btn btn-primary w-20 flex items-center" disabled={questionIndex==Questions.length-1} onClick={handleNext}>Next  </button>
+   <button className="btn btn-warning flex items-center w-20 mr-4 hover:border-red-500" disabled={questionIndex==0} onClick={handlePrev}>Prev</button>
+    <button className="btn btn-primary w-20 flex items-center hover:border-red-500"  disabled={questionIndex==Questions.length-1} onClick={handleNext}>Next  </button>
     <button className="btn btn-success ml-10" onClick={handleSubmit}>sumbit</button>
     </div>
     
