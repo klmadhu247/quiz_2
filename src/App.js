@@ -6,6 +6,8 @@ import { BrowserRouter,Routes,Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Questions from './Questions.js';
 import Result from './Result.js';
+import Admin from './Admin.js';
+
 
 
 function App() {
@@ -16,6 +18,7 @@ function App() {
      <Route path='/quiz' element={<Quiz_Page/>}></Route>
      <Route path='/qstns' element={<Questions/>}></Route>
      <Route path='/result' element={<Result/>}></Route>
+     <Route path='/admin' element={<Admin/>}></Route>
     </Routes>
     </BrowserRouter>
   );

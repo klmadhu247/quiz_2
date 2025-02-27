@@ -1,12 +1,15 @@
 import React from "react";
 import qz from './assets/qz.webp';
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function Quiz_Page() {
   const navigate = useNavigate();
 
+  const location = useLocation();
+  const user = location.state.user;
+
   const handleStart = () => {
-    navigate('/qstns');
+    navigate('/qstns',{state:{us:user}});
   };
 
   return (

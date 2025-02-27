@@ -3,17 +3,24 @@ import axios from "axios";
 import qz from './assets/qz.webp'
 import { MdNavigateNext } from "react-icons/md";
 import { MdNavigateBefore } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 
 function Questions() {
     const [Questions,setQuestions]= useState([]);
+    const [users,setUsers] = useState([]);
     const API = 'http://localhost:5000';
     const [questionIndex,setQuestionIndex] = useState(0)
 const [selected,setSelected] =useState('');
     const [score,setScore] =useState(0);
     const navigate = useNavigate();
     const [timeLeft,setTimeLeft] = useState(60);
+    const [correctAnswers,setCorrectAnswers] = useState([]);
+
+    
+    const location = useLocation();
+ const user = location.state.us;
+
 
     
     useEffect(()=>{
@@ -23,7 +30,12 @@ const [selected,setSelected] =useState('');
             setQuestions(response.data)
             
         }
+        const fetchUsr = async()=>
+            {
+                const res = await axios.get( `${API}/users`)
+            setUsers(res.data)}
         fetchQuestions();
+        fetchUsr();
 
 
         const timer = setInterval(()=>{
@@ -52,6 +64,7 @@ const [selected,setSelected] =useState('');
         if(selected==Questions[questionIndex].answer)
             {
                 setScore((pre)=>pre+1);
+                setCorrectAnswers([...correctAnswers,selected])
             }
 
             setSelected("")
@@ -77,13 +90,23 @@ const [selected,setSelected] =useState('');
 
     }
 
-    const  handleSubmit=()=>
+    const  handleSubmit=async()=>
     {
+        const updatedUser = {...user,hasAttempted:true,answers:{correctAnswers}}
         let finalScore =score
         if(selected==Questions[questionIndex].answer)
         {
             finalScore++
         }
+
+        
+
+        const resp = await axios.put(`${API}/users/${user.id}`,updatedUser);
+       
+
+
+
+
         navigate('/result',{state:{score:finalScore}})
     }
 
@@ -104,7 +127,7 @@ console.log(score)
  </h2> <img src={qz} className="w-10 h-auto mb-2  animate-bounce " />
  </div>
 
- <h5 className="mb-4">Time Remaining: {timeLeft} </h5>
+ <h5 className="mb-4">Time Remaining: <span className={timeLeft<11? 'text-red-400':''}> {timeLeft} </span> </h5>
       {/* {  Questions.map(qs=><p>{qs.question}<ul><li>{qs.options.map(q=>(<><input type="radio" className="ml-1"/><span className="ml-1">{q}</span></>))}</li></ul></p>)} */}
        {Questions.length===0? (<p>Questions are Loading Please Wait...</p>):(<div key={questionIndex}><h4>{Questions[questionIndex].question}</h4>
    <p>{Questions[questionIndex].options.map((op,id)=><><input type="radio" name="Option" value={op}onChange={(e)=>{setSelected(e.target.value)}} className="ml-1"/><span className="ml-1">{op}</span></>)} </p>
