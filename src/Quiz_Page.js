@@ -14,7 +14,7 @@ function Quiz_Page() {
 
   return (
     <div className="container-fluid d-flex justify-content-center align-items-center py-5">
-      <div className='row w-75 border-2 mt-4 rounded-3xl border-red-300 shadow-2xl bg-gray-300'>
+      <div className='row w-75 border-2 mt-4 h-[480px] rounded-3xl border-red-300 shadow-2xl bg-gray-300'>
         
         <div className='col-12 col-md-6 bg-violet-200 p-4 d-flex flex-column justify-content-center align-items-center lg:border rounded-s-3xl md: border rounded-t-3xl'>
           <h2 className='text-3xl font-bold text-center mb-3'>
