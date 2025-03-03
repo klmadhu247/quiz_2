@@ -16,6 +16,7 @@ const [selected,setSelected] =useState('');
     const navigate = useNavigate();
     const [timeLeft,setTimeLeft] = useState(60);
     const [correctAnswers,setCorrectAnswers] = useState([]);
+    const [warned, setWarned] = useState(false);
 
     
     const location = useLocation();
@@ -52,7 +53,33 @@ const [selected,setSelected] =useState('');
             
         },1000)
 
-        return ()=> clearInterval(timer);
+       
+
+        const disableRightClick = (e) => e.preventDefault();
+        const disableCopy = (e) => e.preventDefault();
+
+        const handleVisibilityChange = () => {
+            if (document.hidden) {
+                
+                if (!warned) {
+                    alert("You switched tabs! Please stay on the quiz tab.");
+                    setWarned(true); // Mark as warned
+                } else {
+                    
+                    handleSubmit();
+                }
+            }
+        };
+        document.addEventListener('contextmenu', disableRightClick);
+        document.addEventListener('copy', disableCopy);
+        document.addEventListener('visibilitychange',handleVisibilityChange);
+
+        return () => {
+            clearInterval(timer);
+            document.removeEventListener('contextmenu', disableRightClick);
+            document.removeEventListener('copy', disableCopy);
+            document.removeEventListener('visibilitychange',handleVisibilityChange);
+        };
     
 
     },[timeLeft])
