@@ -70,15 +70,15 @@ const [selected,setSelected] =useState('');
                 }
             }
         };
-        document.addEventListener('contextmenu', disableRightClick);
+      document.addEventListener('contextmenu', disableRightClick);
         document.addEventListener('copy', disableCopy);
         document.addEventListener('visibilitychange',handleVisibilityChange);
 
         return () => {
             clearInterval(timer);
-            document.removeEventListener('contextmenu', disableRightClick);
-            document.removeEventListener('copy', disableCopy);
-            document.removeEventListener('visibilitychange',handleVisibilityChange);
+         document.removeEventListener('contextmenu', disableRightClick);
+           document.removeEventListener('copy', disableCopy);
+         document.removeEventListener('visibilitychange',handleVisibilityChange);
         };
     
 
