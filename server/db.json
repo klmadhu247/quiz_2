@@ -1,0 +1,128 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "user1",
+      "password": "pass123",
+      "hasAttempted": true,
+      "answers": {
+        "correctAnswers": []
+      }
+    },
+    {
+      "id": "2",
+      "username": "admin",
+      "password": "admin",
+      "hasAttempted": false
+    },
+    {
+      "username": "111",
+      "password": "111",
+      "hasAttempted": true,
+      "answers": {
+        "1": "Madrid",
+        "2": "J.K. Rowling"
+      },
+      "id": "3"
+    },
+    {
+      "username": "121",
+      "password": "121",
+      "hasAttempted": true,
+      "id": "4",
+      "answers": {
+        "1": "Paris",
+        "2": "Ernest Hemingway",
+        "3": "https"
+      }
+    },
+    {
+      "username": "123",
+      "password": "123",
+      "hasAttempted": true,
+      "id": "5",
+      "answers": {
+        "1": "Paris",
+        "2": "J.K. Rowling"
+      }
+    },
+    {
+      "id": "0e4d4dfa-9d0d-4613-8592-96e86f267be6",
+      "username": "uu",
+      "password": "1234"
+    },
+    {
+      "id": "7a17624d-2d34-4622-8a25-8c2ceda4b76b",
+      "username": "klm",
+      "password": "123",
+      "hasAttempted": true,
+      "answers": {
+        "correctAnswers": [
+          "Harper Lee"
+        ]
+      }
+    },
+    {
+      "id": "5af19d62-0f34-4e19-b81b-1dce8bf56aa5",
+      "username": "Virat",
+      "password": "123"
+    }
+  ],
+  "questions": [
+    {
+      "question": "Which is the capital of France?",
+      "options": [
+        "London",
+        "Berlin",
+        "Madrid",
+        "Paris"
+      ],
+      "answer": "Paris",
+      "id": "1"
+    },
+    {
+      "question": "Who wrote 'To Kill a Mockingbird'?",
+      "options": [
+        "Harper Lee",
+        "J.K. Rowling",
+        "Ernest Hemingway",
+        "Mark Twain"
+      ],
+      "answer": "Harper Lee",
+      "id": "2"
+    },
+    {
+      "id": "2a0cf777-50b1-4466-afd1-6a7c34f53866",
+      "question": "Who is known as the \"Iron Man of India\"?",
+      "options": [
+        "Sardar Vallabhbhai Patel",
+        "Veer Sivaji",
+        "Netaji",
+        "Savarkar"
+      ],
+      "answer": "Sardar Vallabhbhai Patel"
+    },
+    {
+      "question": "Who wrote the play \"Romeo and Juliet\"?",
+      "options": [
+        "William Shakespeare",
+        "Charles Dickens",
+        "Jane Austen",
+        "Mark Twain"
+      ],
+      "answer": "William Shakespeare",
+      "id": "efeef89f-d81f-4936-9921-3cc9912c4414"
+    },
+    {
+      "id": "364092b9-c878-4b7a-9209-cd4c998f3b65",
+      "question": "In which country did the Olympic Games originate?",
+      "options": [
+        "Italy",
+        "France",
+        "Germany",
+        "Greece"
+      ],
+      "answer": "Greece"
+    }
+  ]
+}

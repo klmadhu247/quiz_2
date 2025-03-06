@@ -17,6 +17,7 @@ const [selected,setSelected] =useState('');
     const [timeLeft,setTimeLeft] = useState(60);
     const [correctAnswers,setCorrectAnswers] = useState([]);
     const [warned, setWarned] = useState(false);
+    const[isSubmitting,setIsSubmitting] = useState(false);
 
     
     const location = useLocation();
@@ -119,6 +120,8 @@ const [selected,setSelected] =useState('');
 
     const  handleSubmit=async()=>
     {
+        
+        setIsSubmitting(true);
         const updatedUser = {...user,hasAttempted:true,answers:{correctAnswers}}
         let finalScore =score
         if(selected==Questions[questionIndex].answer)
@@ -134,7 +137,10 @@ const [selected,setSelected] =useState('');
 
 
 
-        navigate('/result',{state:{score:finalScore}})
+        setTimeout(() => {
+            setIsSubmitting(false); 
+            navigate('/')
+        }, 2000);
     }
 
     // console.log(Questions)
@@ -154,20 +160,28 @@ console.log(score)
  </h2> <img src={qz} className="w-10 h-auto mb-2  animate-bounce " />
  </div>
 
- <h5 className="mb-4">Time Remaining: <span className={timeLeft<11? 'text-red-400':''}> {timeLeft} </span> </h5>
       {/* {  Questions.map(qs=><p>{qs.question}<ul><li>{qs.options.map(q=>(<><input type="radio" className="ml-1"/><span className="ml-1">{q}</span></>))}</li></ul></p>)} */}
-       {Questions.length===0? (<p>Questions are Loading Please Wait...</p>):(<div key={questionIndex}><h4>{Questions[questionIndex].question}</h4>
+       {!isSubmitting? (
+        <> 
+       <h5 className="mb-4">Time Remaining: <span className={timeLeft<11? 'text-red-400':''}> {timeLeft} </span> </h5>
+
+        {Questions.length===0? (<p>Questions are Loading Please Wait...</p>):(<div key={questionIndex}><h4>{Questions[questionIndex].question}</h4>
    <p>{Questions[questionIndex].options.map((op,id)=><><input type="radio" name="Option" value={op}onChange={(e)=>{setSelected(e.target.value)}} className="ml-1"/><span className="ml-1">{op}</span></>)} </p>
 
    <button className="btn btn-warning flex items-center w-20 mr-4 hover:border-red-500" disabled={questionIndex==0} onClick={handlePrev}>Prev</button>
     <button className="btn btn-primary w-20 flex items-center hover:border-red-500"  disabled={questionIndex==Questions.length-1} onClick={handleNext}>Next  </button>
     <button className="btn btn-success ml-10" onClick={handleSubmit}>sumbit</button>
-    </div>
-    
-    
-    
-    )}
 
+   
+    </div>
+
+
+    
+    
+    
+    )}</>):
+    (  <p className="text-lg font-semibold text-blue-500">Submitting your Quiz...</p>)
+}
 
       </div>
     </div>

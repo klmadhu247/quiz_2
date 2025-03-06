@@ -6,7 +6,7 @@ function Admin() {
 
     const API = 'http://localhost:5000';
     const [users,setUsers] = useState([]);
-    const [isUserPage,setIsUserPage] = useState(false);
+    const [isUserPage,setIsUserPage] = useState(true);
     const [isQuestionsPage,setIsQuestionsPage] = useState(false);
     const [questions,setQuestions] =useState([]);
     const [isNewQuestionPage,setIsNewQuestionPage] = useState(false)
