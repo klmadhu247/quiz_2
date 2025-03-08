@@ -103,7 +103,7 @@ function Admin() {
               return;
             }
           
-            // Create the new question object
+           
             const newQuestionSet = {
               "id": dynamicID,
               "question": newQuestion,
@@ -112,7 +112,7 @@ function Admin() {
             };
           
             try {
-              // Post the new question to the API
+             
               const respo = await axios.post(`${API}/questions`, newQuestionSet);
               
              
@@ -220,7 +220,8 @@ function Admin() {
             </thead>
             <tbody>
             {users.filter((ud,id)=>ud.username!=='admin').map((us,id)=><tr><td>{us.username}</td> <td>{us.hasAttempted? 'Yes':'No'}</td>
-            <td>{us.answers? Object.values(us.answers).length : 'N/A'}</td></tr>)}
+            <td>{us.answers && us.answers.correctAnswers
+            ? us.answers.correctAnswers.length: 'N/A'}</td></tr>)}
             </tbody>
           </table>
 
