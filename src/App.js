@@ -1,27 +1,28 @@
-
-import Login from './login_Page.js'
-import Signup from './signup_Page.js';
-import Quiz_Page from './Quiz_Page.js';
-import { BrowserRouter,Routes,Route } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Questions from './Questions.js';
-import Result from './Result.js';
-import Admin from './Admin.js';
-
-
+import React, { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "./login_Page.js";
+import Quiz_Page from "./Quiz_Page.js";
+import Questions from "./Questions.js";
+import Result from "./Result.js";
+import Admin from "./Admin.js";
+import ProtectedRoute from './protectedRoute.js'
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
-  return (
-    <BrowserRouter>
-    <Routes>
-      <Route path='/' element={<Login/>}></Route>
-     <Route path='/quiz' element={<Quiz_Page/>}></Route>
-     <Route path='/qstns' element={<Questions/>}></Route>
-     <Route path='/result' element={<Result/>}></Route>
-     <Route path='/admin' element={<Admin/>}></Route>
-    </Routes>
-    </BrowserRouter>
-  );
+    const [user, setUser] = useState(null); 
+
+    return (
+        <BrowserRouter>
+            <Routes>
+            <Route path="/" element={<Login setUser={setUser} />} />
+            <Route path="/quiz" element={<Quiz_Page />} />
+            <Route path="/qstns" element={<Questions />} />
+            <Route path="/result" element={<Result />} />
+                
+             <Route path="/admin" element={<ProtectedRoute element={<Admin />} user={user} />} />
+            </Routes>
+        </BrowserRouter>
+    );
 }
 
 export default App;

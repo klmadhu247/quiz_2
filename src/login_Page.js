@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import uuid4 from 'uuid4';
 
-function Login() {
+function Login({ setUser }) {
   const API = 'http://localhost:5000';
   const [userName, setUserName] = useState('');
   const [pass, setPass] = useState('');
@@ -29,32 +29,33 @@ function Login() {
 
   const handleSignin = async (e) => {
     e.preventDefault();
+    
     if (!userName || !pass) {
-      alert('UserName & Password is Required');
+        alert("UserName & Password are required");
+        return;
     }
 
     try {
-      const usr = userData.find((ud) => ud.username == userName);
-      if (!usr) {
-        alert('User not found! Please check your username.');
-        return;
-      }
+        const usr = userData.find((ud) => ud.username === userName);
 
-      if (pass!== usr.password) {
-        alert('Incorrect Password! Please check again.');
-        return;
-      }
+        if (!usr) {
+            alert("User not found! Please check your username.");
+            return;
+        }
 
-      if(usr)
-        {
-          navigate(usr.username==='admin'? '/admin':'quiz',{
-            state: { user: usr }});
-      }
-     
+        if (pass !== usr.password) {
+            alert("Incorrect Password! Please check again.");
+            return;
+        }
+
+        setUser(usr);
+
+        navigate(usr.username === "admin" ? "/admin" : "/quiz", { state: { user: usr } });
     } catch (error) {
-      setError(error.message);
+        setError(error.message);
     }
-  };
+};
+
 
   const handleSingUP = async (e) => {
     const userCheck = userData.find((ud) => ud.username == newUserName);
