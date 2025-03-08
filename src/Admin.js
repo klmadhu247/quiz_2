@@ -201,7 +201,7 @@ function Admin() {
         <div className=" d-flex flex-col w-3/4">
            
            {!isNewQuestionPage && <div className="d-flex py-3">
-          <button className="btn btn-primary ml-2" onClick={()=>{setIsUserPage(!isUserPage);setIsQuestionsPage(false)}}>Users Details</button>
+          <button className="btn btn-primary ml-2" onClick={()=>{setIsUserPage(!isUserPage);setIsQuestionsPage(false);setIsEditQUestion(false)}}>Users Details</button>
           <button className="btn btn-warning ml-2" onClick={()=>{setIsQuestionsPage(!isQuestionsPage);setIsUserPage(false);setIsEditQUestion(false)}}>Questions Page</button>
         </div>
 }

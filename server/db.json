@@ -6,7 +6,9 @@
       "password": "pass123",
       "hasAttempted": true,
       "answers": {
-        "correctAnswers": []
+        "correctAnswers": [
+          "Paris"
+        ]
       }
     },
     {

@@ -1,15 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import qz from './assets/qz.webp';
 import { useLocation, useNavigate } from "react-router-dom";
 
 function Quiz_Page() {
   const navigate = useNavigate();
-
   const location = useLocation();
   const user = location.state.user;
 
+  const userAttempt = user.hasAttempted;
+
+  
+  useEffect(() => {
+    if (userAttempt) {
+      setTimeout(() => {
+        navigate("/"); 
+      }, 3000); 
+    }
+  }, [userAttempt, navigate]);
+
   const handleStart = () => {
-    navigate('/qstns',{state:{us:user}});
+    navigate('/qstns', { state: { us: user } });
   };
 
   return (
@@ -26,17 +36,25 @@ function Quiz_Page() {
           <img src={qz} className="w-20 h-auto mt-4 animate-bounce" alt="quiz logo" />
         </div>
 
-        <div className='col-12 col-md-6 d-flex justify-content-center align-items-center py-4'>
-          <div className='w-100 p-5 rounded bg-white bg-transparent'>
-            <h3 className="text-center mb-4">Quiz Instructions</h3>
-            <h5 className="mb-3">Each question carries one mark.</h5>
-            <h5 className="mb-3">You must complete the quiz within 1 minute.</h5>
+        {!userAttempt ? (
+          <div className='col-12 col-md-6 d-flex justify-content-center align-items-center py-4'>
+        <div className='w-100 p-5 rounded bg-white bg-transparent'>
+          <h3 className="text-center mb-4">Quiz Instructions</h3>
+          <h5 className="mb-3">Each question carries one mark.</h5>
+          <h5 className="mb-3">You must complete the quiz within 1 minute.</h5>
 
-            <div className="d-flex justify-content-center">
-              <button className="btn btn-primary w-100 w-md-auto" onClick={handleStart}> Start Quiz</button>
-            </div>
+          <div className="d-flex justify-content-center">
+            <button className="btn btn-primary w-100 w-md-auto" onClick={handleStart}> Start Quiz</button>
           </div>
         </div>
+      </div>
+        ) : (
+          <div className='col-12 col-md-6 d-flex justify-content-center align-items-center py-4'>
+            <div className='w-100 p-5 rounded bg-white bg-transparent'>
+            <h3 className="text-center mb-4">You have already attempted this quiz. Thank you!</h3>
+            </div>
+          </div>
+        )}
 
       </div>
     </div>

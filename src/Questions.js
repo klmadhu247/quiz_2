@@ -169,14 +169,7 @@ console.log(score)
             <div className="flex flex-wrap gap-4 justify-center mt-2">
     {Questions[questionIndex]?.options.map((op, id) => (
         <label key={id} className="flex items-center space-x-2 cursor-pointer">
-            <input 
-                type="radio" 
-                name="Option" 
-                value={op} 
-                checked={selected === op} 
-                onChange={(e) => setSelected(e.target.value)} 
-                className="form-radio text-blue-600"
-            />
+            <input type="radio" name="Option" value={op} checked={selected === op} onChange={(e) => setSelected(e.target.value)} className="form-radio text-blue-600" />
             <span className="text-gray-800">{op}</span>
         </label>
     ))}
