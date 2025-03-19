@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import uuid4 from "uuid4";
+import { useNavigate } from "react-router-dom";
 
 function Admin() {
 
@@ -23,6 +24,9 @@ function Admin() {
     const [editingQUestion_ID,setEditingQUestion_ID] = useState('');
 
     const dynamicID = uuid4();
+    const [sortOrder, setSortOrder] = useState('asc');
+
+    const navigate = useNavigate();
     
 
     useEffect(()=>
@@ -191,6 +195,21 @@ function Admin() {
         const updatedQ = await axios.get(`${API}/questions`);
         setQuestions(updatedQ.data);
        }
+       const toggleSortOrder = () => {
+        const sortedUsers = [...users].sort((a, b) => {
+            const scoreA = a.answers && a.answers.correctAnswers ? a.answers.correctAnswers.length : 0;
+            const scoreB = b.answers && b.answers.correctAnswers ? b.answers.correctAnswers.length : 0;
+            return sortOrder === 'asc' ? scoreA - scoreB : scoreB - scoreA;
+        });
+        setUsers(sortedUsers);
+        setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+    };
+
+    const handleLogout = () => {
+        localStorage.removeItem("user"); 
+        setUser(null); 
+        navigate("/");
+    };
 
     
 
@@ -206,31 +225,33 @@ function Admin() {
         </div>
 }
 
-        {isUserPage &&  <div className="border-2 border-green-600 w-100 rounded-lg mx-3 my-2 px-2 py-2">
-          <h5>Users</h5>
-          <table className="table">
-            <thead>
-                <tr> <th>User Name</th>
-                <th>Quiz Taken</th>
-                <th>Score</th>
-
-                </tr>
-                
-            
-            </thead>
-            <tbody>
-            {users.filter((ud,id)=>ud.username!=='admin').map((us,id)=><tr><td>{us.username}</td> <td>{us.hasAttempted? 'Yes':'No'}</td>
-            <td>{us.answers && us.answers.correctAnswers
-            ? us.answers.correctAnswers.length: 'N/A'}</td></tr>)}
-            </tbody>
-          </table>
-
-        </div>
-        }
+{isUserPage && (
+                        <div className=" mx-3 my-2 px-2 py-2">
+                            <h5>Users</h5>
+                            <table className="table table-striped table-dark rounded-3 overflow-hidden">
+                                <thead className="table-info">
+                                    <tr>
+                                        <th>User Name</th>
+                                        <th>Quiz Taken</th>
+                                        <th>Score ⇅ <button className="btn btn-sm btn-light ml-2" onClick={toggleSortOrder}>⇅</button></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {users.filter((ud) => ud.username !== 'admin').map((us, id) => (
+                                        <tr key={id}>
+                                            <td>{us.username}</td>
+                                            <td>{us.hasAttempted ? 'Yes' : 'No'}</td>
+                                            <td>{us.answers && us.answers.correctAnswers ? us.answers.correctAnswers.length : 'N/A'}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    )}
 
 {isQuestionsPage &&  <div className="border-2 border-green-600 w-100 rounded-lg mx-3 my-2 px-2 py-2">
           <h5>Questions</h5>
-          <table className="table table-bordered rounded-3xl">
+          <table className="table table-striped table-dark rounded-3 overflow-hidden">
            
                 <tbody>{questions.map((qs,id)=><tr><td className="d-flex justify-content-between">{qs.question} <div className="d-flex "><button className="btn btn-warning ml-5" onClick={()=>handleEditQuestion(qs.id)}>Edit </button><button className="btn btn-danger ml-5" onClick={()=>handleDelete(qs.id)}>Delete</button></div></td></tr>)} </tbody>
             
@@ -341,11 +362,16 @@ function Admin() {
             </div>
         </div>
 }
-
+<div className="d-flex flex-col justify-content-center">
+            <button className="btn btn-primary w-20 mt-3 mx-auto w-md-auto" onClick={handleLogout}> Logout</button>
+          </div>
 
                     
         </div>
+        
       </div>
+
+      
     </div>
   );
 }

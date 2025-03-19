@@ -19,6 +19,7 @@ const [selected,setSelected] =useState('');
     const [warned, setWarned] = useState(false);
     const[isSubmitting,setIsSubmitting] = useState(false);
     const [selectedAnswers, setSelectedAnswers] = useState([]);
+    const [showLogout,setShowLogout]= useState(false)
 
 
     
@@ -77,6 +78,8 @@ const [selected,setSelected] =useState('');
         document.addEventListener('copy', disableCopy);
         document.addEventListener('visibilitychange',handleVisibilityChange);
 
+        
+
         return () => {
             clearInterval(timer);
          document.removeEventListener('contextmenu', disableRightClick);
@@ -120,6 +123,7 @@ const [selected,setSelected] =useState('');
 
     const  handleSubmit=async()=>
     {
+        setShowLogout(!showLogout);
         
         setIsSubmitting(true);
         const updatedUser = {...user,hasAttempted:true,answers:{correctAnswers}}
@@ -148,6 +152,12 @@ const [selected,setSelected] =useState('');
 console.log(selected)
 
 console.log(score)
+
+const handleLogout = () => {
+    localStorage.removeItem("user"); 
+    setUser(null); 
+    navigate("/"); 
+};
 
 
 
@@ -190,6 +200,9 @@ console.log(score)
     )}</>):
     (  <p className="text-lg font-semibold text-blue-500">Submitting your Quiz...</p>)
 }
+{showLogout && <div className="d-flex flex-col justify-content-center">
+            <button className="btn btn-primary w-20 mt-3 mx-auto w-md-auto" onClick={handleLogout}> Logout</button>
+          </div>}
 
       </div>
     </div>

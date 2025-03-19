@@ -21,6 +21,10 @@ function Quiz_Page() {
   const handleStart = () => {
     navigate('/qstns', { state: { us: user } });
   };
+  const handleLogout=()=>
+  {
+    navigate('/');
+  }
 
   return (
     <div className="container-fluid d-flex justify-content-center align-items-center py-5">
@@ -45,6 +49,10 @@ function Quiz_Page() {
 
           <div className="d-flex justify-content-center">
             <button className="btn btn-primary w-100 w-md-auto" onClick={handleStart}> Start Quiz</button>
+          </div>
+
+          <div className="d-flex justify-content-center">
+            <button className="btn btn-primary w-20 mt-3 w-md-auto" onClick={handleLogout}> Logout</button>
           </div>
         </div>
       </div>

@@ -1,52 +1,10 @@
 {
   "users": [
     {
-      "id": "1",
-      "username": "user1",
-      "password": "pass123",
-      "hasAttempted": true,
-      "answers": {
-        "correctAnswers": [
-          "Paris"
-        ]
-      }
-    },
-    {
       "id": "2",
       "username": "admin",
       "password": "admin",
       "hasAttempted": false
-    },
-    {
-      "username": "111",
-      "password": "111",
-      "hasAttempted": true,
-      "answers": {
-        "1": "Madrid",
-        "2": "J.K. Rowling"
-      },
-      "id": "3"
-    },
-    {
-      "username": "121",
-      "password": "121",
-      "hasAttempted": true,
-      "id": "4",
-      "answers": {
-        "1": "Paris",
-        "2": "Ernest Hemingway",
-        "3": "https"
-      }
-    },
-    {
-      "username": "123",
-      "password": "123",
-      "hasAttempted": true,
-      "id": "5",
-      "answers": {
-        "1": "Paris",
-        "2": "J.K. Rowling"
-      }
     },
     {
       "id": "0e4d4dfa-9d0d-4613-8592-96e86f267be6",
@@ -73,6 +31,24 @@
       "id": "572e8cb7-260c-42f4-9653-8fd25358f24e",
       "username": "kk",
       "password": "123",
+      "hasAttempted": true,
+      "answers": {
+        "correctAnswers": [
+          "Paris",
+          "Harper Lee",
+          "Sardar Vallabhbhai Patel"
+        ]
+      }
+    },
+    {
+      "id": "e9c387d1-2e88-42ea-a3d8-f8b9d04643a1",
+      "username": "cc",
+      "password": "1234",
+      "gender": "Male",
+      "college": "",
+      "department": "BCA",
+      "email": "",
+      "contactNumber": "",
       "hasAttempted": true,
       "answers": {
         "correctAnswers": [

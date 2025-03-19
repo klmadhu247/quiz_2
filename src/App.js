@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./login_Page.js";
 import Quiz_Page from "./Quiz_Page.js";
@@ -10,6 +10,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
     const [user, setUser] = useState(null); 
+
+    useEffect(() => {
+        const loggedInUser = JSON.parse(localStorage.getItem("user"));
+        if (loggedInUser) {
+            setUser(loggedInUser);
+        }
+    }, []);
 
     return (
         <BrowserRouter>
