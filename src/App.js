@@ -26,7 +26,7 @@ function App() {
             <Route path="/qstns" element={<Questions />} />
             <Route path="/result" element={<Result />} />
                 
-             <Route path="/admin" element={<ProtectedRoute element={<Admin />} user={user} />} />
+            <Route path="/admin" element={<ProtectedRoute element={<Admin user={user} setUser={setUser} />} user={user} setUser={setUser} />} />
             </Routes>
         </BrowserRouter>
     );

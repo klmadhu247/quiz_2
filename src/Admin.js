@@ -3,7 +3,7 @@ import axios from "axios";
 import uuid4 from "uuid4";
 import { useNavigate } from "react-router-dom";
 
-function Admin() {
+function Admin({user,setUser}) {
 
     const API = 'http://localhost:5000';
     const [users,setUsers] = useState([]);
@@ -27,6 +27,7 @@ function Admin() {
     const [sortOrder, setSortOrder] = useState('asc');
 
     const navigate = useNavigate();
+    const [searchQuery,setSearchQuery] = useState("");
     
 
     useEffect(()=>
@@ -211,6 +212,10 @@ function Admin() {
         navigate("/");
     };
 
+    const filteredUsers = users.filter((user) =>
+        user.username.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+
     
 
   return (
@@ -227,8 +232,19 @@ function Admin() {
 
 {isUserPage && (
                         <div className=" mx-3 my-2 px-2 py-2">
-                            <h5>Users</h5>
-                            <table className="table table-striped table-dark rounded-3 overflow-hidden">
+                           <div> <h5>Users</h5> <div className="flex items-center p-3 justify-between">
+        <h3 className="text-2lg font-semibold mb-3 text-green-700">Users</h3>
+        <input
+          type="text"
+          placeholder="Search by username..."
+          className="p-2 border border-gray-300 rounded-lg w-1/2"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+      </div>
+      </div>
+                         <div className="overflow-x-auto">  
+                             <table className="table table-striped table-dark rounded-3 overflow-hidden min-w-full border border-gray-300 rounded-lg shadow-2xl">
                                 <thead className="table-info">
                                     <tr>
                                         <th>User Name</th>
@@ -237,15 +253,23 @@ function Admin() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {users.filter((ud) => ud.username !== 'admin').map((us, id) => (
-                                        <tr key={id}>
-                                            <td>{us.username}</td>
-                                            <td>{us.hasAttempted ? 'Yes' : 'No'}</td>
-                                            <td>{us.answers && us.answers.correctAnswers ? us.answers.correctAnswers.length : 'N/A'}</td>
-                                        </tr>
-                                    ))}
-                                </tbody>
+  {filteredUsers.length > 0 ? (
+    filteredUsers.map((user, index) => (
+      <tr key={index} className="text-center border hover:bg-gray-100 transition">
+        <td className="py-3 px-4 border">{user.username}</td>
+        <td className="py-3 px-4 border">{user.hasAttempted ? "Yes" : "No"}</td>
+        <td className="py-3 px-4 border">{user.answers?.correctAnswers?.length || 0}</td>
+      </tr>
+    ))
+  ) : (
+    <tr>
+      <td colSpan="3" className="text-center py-3">No users found.</td>
+    </tr>
+  )}
+</tbody>
+
                             </table>
+                            </div>
                         </div>
                     )}
 
