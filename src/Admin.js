@@ -231,8 +231,8 @@ function Admin({user,setUser}) {
 }
 
 {isUserPage && (
-                        <div className=" mx-3 my-2 px-2 py-2">
-                           <div> <h5>Users</h5> <div className="flex items-center p-3 justify-between">
+                        <div className=" mx-3 px-2 py-2">
+                            <div className="flex items-center p-3 justify-between">
         <h3 className="text-2lg font-semibold mb-3 text-green-700">Users</h3>
         <input
           type="text"
@@ -242,7 +242,7 @@ function Admin({user,setUser}) {
           onChange={(e) => setSearchQuery(e.target.value)}
         />
       </div>
-      </div>
+     
                          <div className="overflow-x-auto">  
                              <table className="table table-striped table-dark rounded-3 overflow-hidden min-w-full border border-gray-300 rounded-lg shadow-2xl">
                                 <thead className="table-info">
