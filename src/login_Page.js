@@ -73,26 +73,52 @@ function Login({ setUser }) {
 
   const handleSignup = async (e) => {
     e.preventDefault();
-    const userCheck = userData.find((ud) => ud.username === newUserName);
-
-    if (!userCheck && newPassword === confirmPassword) {
-      const newUser = {
-        id: randomId,
-        username: newUserName,
-        password: newPassword,
-        gender,
-        college,
-        department,
-        email,
-        contactNumber
-      };
-
-      const respo = await axios.post(`${API}/users`, newUser);
-
-      setUserData([...userData, respo.data]);
-      alert('Signup successful');
+    
+    if (!newUserName || !newPassword || !confirmPassword || !gender || !college || !department || !email || !contactNumber) {
+        setError("All fields are required");
+        return;
     }
-  };
+
+    if (newPassword !== confirmPassword) {
+        setError("Password and Confirm Password do not match!");
+        return;
+    }
+
+    const userCheck = userData.find((ud) => ud.username === newUserName);
+    
+    if (userCheck) {
+        setError("Username already exists! Choose a different one.");
+        return;
+    }
+
+    try {
+        const newUser = {
+            id: randomId,
+            username: newUserName,
+            password: newPassword,
+            gender,
+            college,
+            department,
+            email,
+            contactNumber,
+            hasAttempted: false
+        };
+
+        const respo = await axios.post(`${API}/users`, newUser);
+        
+        setUserData([...userData, respo.data]); 
+        localStorage.setItem('user', JSON.stringify(respo.data));
+
+        setUser(respo.data); 
+        alert("Signup successful! Redirecting to quiz...");
+        
+        navigate("/quiz", { state: { user: respo.data } }); 
+
+    } catch (error) {
+        setError("Signup failed! Please try again.");
+    }
+};
+
 
   return (
     <div className="container-fluid d-flex justify-content-center align-items-center py-5">
@@ -144,8 +170,22 @@ function Login({ setUser }) {
                 </div>
               </div>
               <div className="mb-2">
+                <label htmlFor="college">College Name</label>
+                <input type="text" value={college} placeholder="Enter College Name" className="form-control" onChange={(e) => setCollege(e.target.value)} />
+              </div>
+              <div className="mb-2">
                 <label htmlFor="department">Department</label>
                 <input type="text" value={department} placeholder="Enter Department" className="form-control" onChange={(e) => setDepartment(e.target.value)} />
+              </div>
+
+              <div className="mb-2">
+                <label htmlFor="contactNumber">Contact Number</label>
+                <input type="number" value={contactNumber} placeholder="Contact Number" className="form-control" onChange={(e) => setContactNumber(e.target.value)} />
+              </div>
+
+              <div className="mb-2">
+                <label htmlFor="email">Email</label>
+                <input type="mail" value={email} placeholder="Email" className="form-control" onChange={(e) => setEmail(e.target.value)} />
               </div>
 
               <div className="mb-2">
@@ -156,6 +196,7 @@ function Login({ setUser }) {
                 <label htmlFor="confirmPassword">Confirm Password</label>
                 <input type="password" value={confirmPassword} placeholder="Confirm Password" className="form-control" onChange={(e) => setConfirmPassword(e.target.value)} />
               </div>
+              {error && <p className="text-danger text-center">{error}</p>}
               <button className="btn btn-primary w-100" onClick={handleSignup}>Signup</button>
             </form>
           )}

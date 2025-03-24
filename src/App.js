@@ -21,8 +21,8 @@ function App() {
     return (
         <BrowserRouter>
             <Routes>
-            <Route path="/" element={<Login setUser={setUser} />} />
-            <Route path="/quiz" element={<Quiz_Page />} />
+            <Route path="/" element={<Login setUser={setUser}  />} />
+            <Route path="/quiz" element={<Quiz_Page  user={user} setUser={setUser}/>} />
             <Route path="/qstns" element={<Questions />} />
             <Route path="/result" element={<Result />} />
                 

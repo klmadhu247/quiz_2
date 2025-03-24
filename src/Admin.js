@@ -243,33 +243,44 @@ function Admin({user,setUser}) {
         />
       </div>
      
-                         <div className="overflow-x-auto">  
-                             <table className="table table-striped table-dark rounded-3 overflow-hidden min-w-full border border-gray-300 rounded-lg shadow-2xl">
-                                <thead className="table-info">
-                                    <tr>
-                                        <th>User Name</th>
-                                        <th>Quiz Taken</th>
-                                        <th>Score ⇅ <button className="btn btn-sm btn-light ml-2" onClick={toggleSortOrder}>⇅</button></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-  {filteredUsers.length > 0 ? (
-    filteredUsers.map((user, index) => (
-      <tr key={index} className="text-center border hover:bg-gray-100 transition">
-        <td className="py-3 px-4 border">{user.username}</td>
-        <td className="py-3 px-4 border">{user.hasAttempted ? "Yes" : "No"}</td>
-        <td className="py-3 px-4 border">{user.answers?.correctAnswers?.length || 0}</td>
+      <div className="overflow-x-auto">  
+  <table className="table table-striped table-dark table-hover rounded-3 overflow-hidden shadow-lg w-100">
+    <thead className="table-info">
+      <tr>
+        <th style={{ width: "12%" }}>User Name</th>
+        <th style={{ width: "15%" }}>Department</th>
+        <th style={{ width: "15%" }}>College</th>
+        <th style={{ width: "20%" }}>Email</th>
+        <th style={{ width: "10%" }}>Gender</th>
+        <th style={{ width: "10%" }}>Quiz Taken</th>
+        <th style={{ width: "18%" }}>
+          Score  
+          <button className="btn btn-sm btn-light ml-2" onClick={toggleSortOrder}>⇅</button>
+        </th>
       </tr>
-    ))
-  ) : (
-    <tr>
-      <td colSpan="3" className="text-center py-3">No users found.</td>
-    </tr>
-  )}
-</tbody>
+    </thead>
+    <tbody>
+      {filteredUsers.length > 0 ? (
+        filteredUsers.filter(user => user.username !== "admin").map((user, index) => (
+          <tr key={index}>
+            <td className="py-3 px-4">{user.username}</td>
+            <td className="py-3 px-4">{user.department || "N/A"}</td>
+            <td className="py-3 px-4">{user.college || "N/A"}</td>
+            <td className="py-3 px-4">{user.email || "N/A"}</td>
+            <td className="py-3 px-4">{user.gender || "N/A"}</td>
+            <td className="py-3 px-4">{user.hasAttempted ? "Yes" : "No"}</td>
+            <td className="py-3 px-4">{user.answers?.correctAnswers?.length || 0}</td>
+          </tr>
+        ))
+      ) : (
+        <tr>
+          <td colSpan="7" className="text-center py-3">No users found.</td>
+        </tr>
+      )}
+    </tbody>
+  </table>
+</div>
 
-                            </table>
-                            </div>
                         </div>
                     )}
 
@@ -387,7 +398,7 @@ function Admin({user,setUser}) {
         </div>
 }
 <div className="d-flex flex-col justify-content-center">
-            <button className="btn btn-primary w-20 mt-3 mx-auto w-md-auto" onClick={handleLogout}> Logout</button>
+            <button className="btn btn-primary w-20 mt-3 mx-auto w-md-auto mb-4" onClick={handleLogout}> Logout</button>
           </div>
 
                     

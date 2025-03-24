@@ -6,7 +6,6 @@
       "password": "admin",
       "hasAttempted": false
     },
-    
     {
       "id": "7a17624d-2d34-4622-8a25-8c2ceda4b76b",
       "username": "klm",
@@ -18,7 +17,6 @@
         ]
       }
     },
-    
     {
       "id": "572e8cb7-260c-42f4-9653-8fd25358f24e",
       "username": "kk",
@@ -49,6 +47,38 @@
           "Sardar Vallabhbhai Patel"
         ]
       }
+    },
+    {
+      "id": "14317df3-077a-4433-b2b3-15f4fef60727",
+      "username": "zz",
+      "password": "123",
+      "gender": "Male",
+      "college": "",
+      "department": "BCA",
+      "email": "",
+      "contactNumber": ""
+    },
+    {
+      "id": "7b398d0f-5887-45d7-b4a1-ec6f8322dcf1",
+      "username": "k",
+      "password": "123",
+      "gender": "Male",
+      "college": "dfd",
+      "department": "dd",
+      "email": "kl@gmail",
+      "contactNumber": "9090909",
+      "hasAttempted": false
+    },
+    {
+      "id": "05edb088-b4f6-4df8-903b-f1ab0e5da728",
+      "username": "gd",
+      "password": "3434",
+      "gender": "Male",
+      "college": "nlm",
+      "department": "Bcom",
+      "email": "kl@gmail.com",
+      "contactNumber": "898989",
+      "hasAttempted": false
     }
   ],
   "questions": [
